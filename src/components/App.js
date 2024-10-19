@@ -1,13 +1,19 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './../styles/App.css';
 
 const App = () => {
-  const [count, setCount] = useState(0);
+const [seconds, setSeconds] = useState(0);
 
-  setInterval(() => {
-    setCount(count++)
-  }, 1000);
+ useEffect(() => {
+    // Increment seconds every second (1000ms)
+    const interval = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
   
   return (
     <div>
